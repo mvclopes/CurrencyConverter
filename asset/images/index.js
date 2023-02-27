@@ -1,0 +1,1 @@
+export const MONEY_EXCHANGE_ICON = require('./money_exchange.png');
