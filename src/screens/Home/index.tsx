@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Image, ImageBackground, SafeAreaView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Button, Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // Components
 import AmountInputField from "../../components/AmountInputField";
@@ -10,8 +10,10 @@ export default function Home() {
     const [toCurrency, setToCurrency] = useState('')
 
     return(
-        <ImageBackground style={styles.container} source={MONEY_BACKGROUND}>
+        <ImageBackground blurRadius={4} style={styles.container} source={MONEY_BACKGROUND}>
             <SafeAreaView>
+                <Text style={styles.title}>Conversor de moedas</Text>
+
                 <AmountInputField
                     onChangeText={setFromCurrency}
                     value={fromCurrency}
@@ -43,12 +45,20 @@ export default function Home() {
 
 const styles = StyleSheet.create({
     container:{
-        flex: 1
+        flex: 1,
+        justifyContent: 'center',
+    },
+    title: {
+        color: '#FFF',
+        fontSize: 36,
+        fontWeight: 'bold',
+        marginBottom: 24,
     },
     containerButton: {
         marginHorizontal: 16,
     },
     image: {
+        alignSelf: 'center',
         width: 50,
         height: 50
     }
