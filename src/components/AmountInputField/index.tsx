@@ -5,6 +5,7 @@ export default function AmountInputField({...props}) {
             placeholderTextColor={'#00000095'} 
             keyboardType="decimal-pad" 
             style={styles.input} 
+            inputMode='decimal'
             {...props}
         />
 }
