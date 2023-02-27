@@ -6,8 +6,8 @@ import AmountInputField from "../../components/AmountInputField";
 import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
 
 export default function Home() {
-    const [fromCurrency, setFromCurrency] = useState('')
-    const [toCurrency, setToCurrency] = useState('')
+    const [fromCurrency, setFromCurrency] = useState<number>()
+    const [toCurrency, setToCurrency] = useState<number>()
 
     return(
         <ImageBackground blurRadius={4} style={styles.container} source={MONEY_BACKGROUND}>

@@ -1,7 +1,7 @@
 import { StyleSheet, TextInput } from "react-native";
 
 export default function AmountInputField({...props}) {
-    return <TextInput keyboardType="decimal-pad" style={styles.input} {...props}/>
+    return <TextInput placeholderTextColor={'#00000095'} keyboardType="decimal-pad" style={styles.input} {...props}/>
 }
 
 const styles = StyleSheet.create({
