@@ -1,42 +1,14 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // Components
 import AmountInputField from "../../components/AmountInputField";
 import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
+import useConvertAmount from "./hooks/useConvertAmount";
+
 
 export default function Home() {
-    const [fromCurrency, setFromCurrency] = useState<number>(0)
-    const [toCurrency, setToCurrency] = useState<number>(0)
-
-    function convertFromAmount(value: string) {
-        try {
-            var amount = parseFloat(value);
-            setFromCurrency(amount >= 0 ? amount : 0);
-            setToCurrency(amount >= 0 ? amount * 5 : 0);
-            console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
-        } catch (error) {
-            console.error(error);
-            zeroStates();
-        }
-    }
-
-    function convertToAmount(value: string) {
-        try {
-            var amount = parseFloat(value);
-            setFromCurrency(amount >= 0 ? amount / 5: 0);
-            setToCurrency(amount >= 0 ? amount : 0);
-            console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
-        } catch (error) {
-            console.error(error);
-            zeroStates();
-        }
-    }
-
-    function zeroStates() {
-        setFromCurrency(0);
-        setToCurrency(0);
-    }
+    const { fromCurrency, toCurrency, convertToAmount, convertFromAmount } = useConvertAmount();
 
     return(
         <ImageBackground blurRadius={4} style={styles.container} source={MONEY_BACKGROUND}>
@@ -45,7 +17,7 @@ export default function Home() {
 
                 <AmountInputField
                     onChangeText={(value:string) => convertFromAmount(value)}
-                    value={fromCurrency.toString()}
+                    value={fromCurrency}
                     placeholder='Moeda a ser convertida'
                     defaultValue="0"
                 />
@@ -56,7 +28,7 @@ export default function Home() {
 
                 <AmountInputField
                     onChangeText={(value:string) => convertToAmount(value) }
-                    value={toCurrency.toString()}
+                    value={toCurrency}
                     placeholder='Moeda convertida'
                     defaultValue="0"
                 />
