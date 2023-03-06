@@ -15,10 +15,10 @@ export default function Home() {
             <SafeAreaView>
                 <Text style={styles.title}>Conversor de moedas</Text>
 
-                <View style={{flexDirection:'row'}}>
+                <View style={styles.row}>
                     <CurrencySelector />
                     <AmountInputField
-                        onChangeText={(value:string) => convertFromAmount(value)}
+                        onChangeText={(value:string) => convertFromAmount(value, 5)}
                         value={fromCurrency}
                         placeholder='Moeda a ser convertida'
                         defaultValue="0"
@@ -29,17 +29,17 @@ export default function Home() {
                     <Image style={styles.image} source={MONEY_EXCHANGE_ICON}/>
                 </TouchableOpacity>
                 
-                <View style={{flexDirection:'row'}}>
+                <View style={styles.row}>
                     <CurrencySelector defaultCurrency="EURO"/>
                     <AmountInputField
-                        onChangeText={(value:string) => convertToAmount(value) }
+                        onChangeText={(value:string) => convertToAmount(value, 1) }
                         value={toCurrency}
                         placeholder='Moeda convertida'
                         defaultValue="0"
                     />
                 </View>
             </SafeAreaView>
-        </ImageBackground>
+          </ImageBackground>
     );
 }
 
@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
     container:{
         flex: 1,
         justifyContent: 'center',
+    },
+    row: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     title: {
         color: '#FFF',

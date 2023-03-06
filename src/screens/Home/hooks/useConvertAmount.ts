@@ -4,11 +4,11 @@ export default function useConvertAmount() {
     const [fromCurrency, setFromCurrency] = useState<number>(0)
     const [toCurrency, setToCurrency] = useState<number>(0)
 
-    function convertFromAmount(value: string) {
+    function convertFromAmount(value: string, ratio: number) {
         try {
             var amount = parseFloat(value);
             setFromCurrency(amount >= 0 ? amount : 0);
-            setToCurrency(amount >= 0 ? amount * 5 : 0);
+            setToCurrency(amount >= 0 ? amount * ratio : 0);
             console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
         } catch (error) {
             console.error(error);
@@ -16,10 +16,10 @@ export default function useConvertAmount() {
         }
     }
 
-    function convertToAmount(value: string) {
+    function convertToAmount(value: string, ratio: number) {
         try {
             var amount = parseFloat(value);
-            setFromCurrency(amount >= 0 ? amount / 5: 0);
+            setFromCurrency(amount >= 0 ? amount / ratio : 0);
             setToCurrency(amount >= 0 ? amount : 0);
             console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
         } catch (error) {
