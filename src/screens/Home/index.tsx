@@ -5,7 +5,7 @@ import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacit
 import AmountInputField from "../../components/AmountInputField";
 import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
 import useConvertAmount from "./hooks/useConvertAmount";
-
+import CurrencySelector from "../../components/CurrencySelector";
 
 export default function Home() {
     const { fromCurrency, toCurrency, convertToAmount, convertFromAmount } = useConvertAmount();
@@ -15,23 +15,29 @@ export default function Home() {
             <SafeAreaView>
                 <Text style={styles.title}>Conversor de moedas</Text>
 
-                <AmountInputField
-                    onChangeText={(value:string) => convertFromAmount(value)}
-                    value={fromCurrency}
-                    placeholder='Moeda a ser convertida'
-                    defaultValue="0"
-                />
-
+                <View style={{flexDirection:'row'}}>
+                    <CurrencySelector />
+                    <AmountInputField
+                        onChangeText={(value:string) => convertFromAmount(value)}
+                        value={fromCurrency}
+                        placeholder='Moeda a ser convertida'
+                        defaultValue="0"
+                    />
+                </View>
+                
                 <TouchableOpacity onPress={() => console.log('Change currency')}>
                     <Image style={styles.image} source={MONEY_EXCHANGE_ICON}/>
                 </TouchableOpacity>
-
-                <AmountInputField
-                    onChangeText={(value:string) => convertToAmount(value) }
-                    value={toCurrency}
-                    placeholder='Moeda convertida'
-                    defaultValue="0"
-                />
+                
+                <View style={{flexDirection:'row'}}>
+                    <CurrencySelector defaultCurrency="EURO"/>
+                    <AmountInputField
+                        onChangeText={(value:string) => convertToAmount(value) }
+                        value={toCurrency}
+                        placeholder='Moeda convertida'
+                        defaultValue="0"
+                    />
+                </View>
             </SafeAreaView>
         </ImageBackground>
     );
