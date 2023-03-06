@@ -4,3 +4,5 @@ export const currencies = new Map<string, number>([
     ["Euro", 5.50],
     ["Libra", 6.20]
 ]);
+
+export const currenciesLabel = Array.from(currencies.keys())
