@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Modal, StyleSheet, Text, Pressable, View, FlatList, TouchableOpacity} from 'react-native';
-import { currencies, currenciesLabel } from '../../utils/currencies';
+import {Modal, StyleSheet, Text, Pressable, View, FlatList} from 'react-native';
+import { currencies } from '../../utils/currencies';
 import { Currencies, CurrenciesEnum } from '../../utils/enums/currenciesEnum';
 import { CurrencyItem } from '../CurrencyItem';
 
@@ -17,7 +17,7 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
 
     const [currentCurrencyLabel, setCurrentCurrencyLabel] = useState<string>();
 
-    function changeCurrency(currency: string) {
+    function changeCurrency(currency: CurrenciesEnum) {
         let value: number = currencies.get(currency) ? currencies.get(currency) as number : DEFAULT_CURRENCY_VALUE;
         setCurrentCurrencyLabel(currency);
         onCurrencyChanged(value);
