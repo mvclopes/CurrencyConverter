@@ -12,7 +12,7 @@ export const CurrencyItem = ({currency, onPressItem}: CurrencyItemProps) => {
         <TouchableOpacity 
             style={styles.item} 
             onPress={() => onPressItem()} >
-            <Text>{currency}</Text>
+            <Text style={styles.currencyText}>{currency}</Text>
         </TouchableOpacity>
     )
 };
@@ -21,6 +21,13 @@ const styles = StyleSheet.create({
     item:{
         padding: 20,
         margin: 8,
-        backgroundColor: '#f9c2ff', 
+        backgroundColor: '#26874E',
+        borderRadius: 16,
+        alignItems: 'center'
+    },
+    currencyText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#fff'
       },
 });
