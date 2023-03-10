@@ -1,6 +1,6 @@
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet, TextInput, TextInputProps } from "react-native";
 
-export default function AmountInputField({...props}) {
+export default function AmountInputField({...props}: TextInputProps) {
     return <TextInput 
             placeholderTextColor={'#00000095'} 
             keyboardType="decimal-pad" 
