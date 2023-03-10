@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 // Components
 import AmountInputField from "../../components/AmountInputField";
@@ -9,6 +9,8 @@ import CurrencySelector from "../../components/CurrencySelector";
 
 export default function Home() {
     const { fromCurrency, toCurrency, convertToAmount, convertFromAmount } = useConvertAmount();
+    const [ratioTo, setRatioTo] = useState(1);
+    const [ratioFrom, setRatioFrom] = useState(1);
 
     return(
         <ImageBackground blurRadius={4} style={styles.container} source={MONEY_BACKGROUND}>
@@ -16,9 +18,12 @@ export default function Home() {
                 <Text style={styles.title}>Conversor de moedas</Text>
 
                 <View style={styles.row}>
-                    <CurrencySelector />
+                    <CurrencySelector onCurrencyChanged={(value) => {
+                        console.log(`valueTo: ${value}`);
+                        setRatioTo(value);
+                    }}/>
                     <AmountInputField
-                        onChangeText={(value:string) => convertFromAmount(value, 5)}
+                        onChangeText={(value:string) => convertFromAmount(value, ratioTo)}
                         value={fromCurrency}
                         placeholder='Moeda a ser convertida'
                         defaultValue="0"
@@ -30,9 +35,14 @@ export default function Home() {
                 </TouchableOpacity>
                 
                 <View style={styles.row}>
-                    <CurrencySelector defaultCurrency="EURO"/>
+                    <CurrencySelector defaultCurrency="EURO"
+                        onCurrencyChanged={(value) => {
+                            console.log(`valueFrom: ${value}`);
+                            setRatioFrom(value);
+                    }}/>
                     <AmountInputField
-                        onChangeText={(value:string) => convertToAmount(value, 1) }
+                        editable={false}
+                        onChangeText={(value:string) => convertToAmount(value, ratioFrom) }
                         value={toCurrency}
                         placeholder='Moeda convertida'
                         defaultValue="0"
