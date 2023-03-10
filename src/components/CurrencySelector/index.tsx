@@ -30,11 +30,12 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
                 style={({pressed}) => [
                     {
                         backgroundColor: pressed ? '#C3C3C3' : '#FFF',
+                        borderColor: pressed ? '#FFF' : '#26874E'
                     },
                     styles.box
                 ]}
                 onPress={() => setModalVisible(true)}>
-                <Text>
+                <Text style={styles.currencyText}>
                     {
                         currentCurrencyLabel ? currentCurrencyLabel : 
                             defaultCurrency ? defaultCurrency : CurrenciesEnum.DOLAR
@@ -47,7 +48,7 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
                 visible={modalVisible}
                 onRequestClose={() => setModalVisible(!modalVisible)}>
                     <View style={styles.modalView}>
-                        <Text>Escolha a moeda</Text>
+                        <Text style={styles.modalTitle}>Escolha a moeda</Text>
                         <FlatList 
                             data={Currencies}
                             renderItem={({item}) => 
@@ -70,22 +71,21 @@ const styles = StyleSheet.create({
   box: {
     height: 60,
     margin: 24,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
-    borderColor: '#C3C3C3',
-    borderRadius: 16
-  },
-  centeredView: {
-    flex: 1,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  currencyText: {
+    fontWeight: 'bold',
+    color: '#26874E'
   },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
+    padding: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -94,5 +94,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-  },  
+  },
+  modalTitle: {
+    fontSize:20,
+    fontWeight: 'bold',
+    color: '#26874E',
+    alignSelf: 'center',
+  }  
 });
