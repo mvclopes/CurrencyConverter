@@ -1,8 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { CurrenciesEnum } from "../../utils/enums/currenciesEnum";
 
 interface CurrencyItemProps {
-    currency: string;
+    currency: CurrenciesEnum;
     onPressItem: () => void;
 }
 

@@ -6,6 +6,7 @@ import AmountInputField from "../../components/AmountInputField";
 import CurrencySelector from "../../components/CurrencySelector";
 
 import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
+import { CurrenciesEnum } from "../../utils/enums/currenciesEnum";
 
 // Hooks
 import useConvertAmount from "./hooks/useConvertAmount";
@@ -37,7 +38,7 @@ export default function Home() {
                 </TouchableOpacity>
                 
                 <View style={styles.row}>
-                    <CurrencySelector defaultCurrency="EURO"
+                    <CurrencySelector defaultCurrency={CurrenciesEnum.LIBRA}
                         onCurrencyChanged={(value) => {
                             setRatioFrom(value);
                     }}/>

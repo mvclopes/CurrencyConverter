@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, Pressable, View, FlatList, TouchableOpacity} from 'react-native';
 import { currencies, currenciesLabel } from '../../utils/currencies';
+import { Currencies, CurrenciesEnum } from '../../utils/enums/currenciesEnum';
 import { CurrencyItem } from '../CurrencyItem';
 
 interface CurrencySelectorProps {
-    defaultCurrency?: string;
+    defaultCurrency?: CurrenciesEnum;
     onCurrencyChanged: (value:number) => void;
 }
 
@@ -50,7 +51,7 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
                     <View style={styles.modalView}>
                         <Text>Escolha a moeda</Text>
                         <FlatList 
-                            data={currenciesLabel}
+                            data={Currencies}
                             renderItem={({item}) => 
                                 <CurrencyItem 
                                     currency={item} 

@@ -1,9 +1,13 @@
-enum CurrenciesEnum {
+export enum CurrenciesEnum {
     REAL = 'Real',
     DOLAR = 'Dólar',
     EURO = 'Euro',
     LIBRA = 'Libra'	
 }
 
-
-export default CurrenciesEnum;
+export const Currencies = [
+    CurrenciesEnum.REAL,
+    CurrenciesEnum.DOLAR,
+    CurrenciesEnum.EURO,
+    CurrenciesEnum.LIBRA
+];
