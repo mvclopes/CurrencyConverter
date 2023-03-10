@@ -6,7 +6,6 @@ export enum CurrenciesEnum {
 }
 
 export const Currencies = [
-    CurrenciesEnum.REAL,
     CurrenciesEnum.DOLAR,
     CurrenciesEnum.EURO,
     CurrenciesEnum.LIBRA

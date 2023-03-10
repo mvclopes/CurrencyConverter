@@ -1,52 +1,50 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, View } from "react-native";
 
 // Components
 import AmountInputField from "../../components/AmountInputField";
 import CurrencySelector from "../../components/CurrencySelector";
 
 import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
-import { CurrenciesEnum } from "../../utils/enums/currenciesEnum";
 
-// Hooks
-import useConvertAmount from "./hooks/useConvertAmount";
+import RealEnum from "../../utils/enums/realEnum";
 
 export default function Home() {
-    const { fromCurrency, toCurrency, convertToAmount, convertFromAmount } = useConvertAmount();
-    const [ratioTo, setRatioTo] = useState(1);
-    const [ratioFrom, setRatioFrom] = useState(1);
+    const [ratio, setRatio] = useState(RealEnum.DOLAR);
+    const [amount, setAmount] = useState(0);
+    const [convertedAmount, setConvertedAmount] = useState(0);
 
     return(
         <ImageBackground blurRadius={4} style={styles.container} source={MONEY_BACKGROUND}>
             <SafeAreaView>
-                <Text style={styles.title}>Conversor de moedas</Text>
+                <Text style={[styles.title]}>Converta para reais</Text>
 
                 <View style={styles.row}>
                     <CurrencySelector onCurrencyChanged={(value) => {
-                        setRatioTo(value);
+                        setRatio(value);
+                        setConvertedAmount(amount*value)
                     }}/>
                     <AmountInputField
-                        onChangeText={(value:string) => convertFromAmount(value, ratioTo)}
-                        value={fromCurrency}
-                        placeholder='Moeda a ser convertida'
+                        onChangeText={(value:string) => {
+                            var amount = parseFloat(value);
+                            var convertedAmount = amount * ratio;
+                            setAmount(amount >= 0 ? amount : 0);
+                            setConvertedAmount(convertedAmount >= 0 ? convertedAmount : 0);
+                        }}
+                        value={amount.toString()}
                         defaultValue="0"
                     />
                 </View>
                 
-                <TouchableOpacity onPress={() => console.log('Change currency')}>
-                    <Image style={styles.image} source={MONEY_EXCHANGE_ICON}/>
-                </TouchableOpacity>
+                <Image style={styles.image} source={MONEY_EXCHANGE_ICON}/>
                 
                 <View style={styles.row}>
-                    <CurrencySelector defaultCurrency={CurrenciesEnum.LIBRA}
-                        onCurrencyChanged={(value) => {
-                            setRatioFrom(value);
-                    }}/>
                     <AmountInputField
                         editable={false}
-                        onChangeText={(value:string) => convertToAmount(value, ratioFrom) }
-                        value={toCurrency}
-                        placeholder='Moeda convertida'
+                        onChangeText={(value:string) => {
+
+                        }}
+                        value={convertedAmount.toString()}
                         defaultValue="0"
                     />
                 </View>
@@ -69,6 +67,7 @@ const styles = StyleSheet.create({
         fontSize: 36,
         fontWeight: 'bold',
         marginBottom: 24,
+        alignSelf: 'center',
     },
     result: {
         color: '#FF0000',

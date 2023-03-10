@@ -9,12 +9,10 @@ interface CurrencySelectorProps {
     onCurrencyChanged: (value:number) => void;
 }
 
-const DEFAULT_CURRENCY_NAME = 'Real';
 const DEFAULT_CURRENCY_VALUE = 1;
 
 export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: CurrencySelectorProps) {
     const [modalVisible, setModalVisible] = useState(false);
-
     const [currentCurrencyLabel, setCurrentCurrencyLabel] = useState<string>();
 
     function changeCurrency(currency: CurrenciesEnum) {
@@ -39,7 +37,7 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
                 <Text>
                     {
                         currentCurrencyLabel ? currentCurrencyLabel : 
-                            defaultCurrency ? defaultCurrency : DEFAULT_CURRENCY_NAME
+                            defaultCurrency ? defaultCurrency : CurrenciesEnum.DOLAR
                     }
                 </Text>
             </Pressable>
