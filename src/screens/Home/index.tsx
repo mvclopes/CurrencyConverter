@@ -3,9 +3,12 @@ import { Image, ImageBackground, SafeAreaView, StyleSheet, Text, TextInput, Touc
 
 // Components
 import AmountInputField from "../../components/AmountInputField";
-import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
-import useConvertAmount from "./hooks/useConvertAmount";
 import CurrencySelector from "../../components/CurrencySelector";
+
+import { MONEY_BACKGROUND, MONEY_EXCHANGE_ICON } from "../../../asset/images";
+
+// Hooks
+import useConvertAmount from "./hooks/useConvertAmount";
 
 export default function Home() {
     const { fromCurrency, toCurrency, convertToAmount, convertFromAmount } = useConvertAmount();
@@ -19,7 +22,6 @@ export default function Home() {
 
                 <View style={styles.row}>
                     <CurrencySelector onCurrencyChanged={(value) => {
-                        console.log(`valueTo: ${value}`);
                         setRatioTo(value);
                     }}/>
                     <AmountInputField
@@ -37,7 +39,6 @@ export default function Home() {
                 <View style={styles.row}>
                     <CurrencySelector defaultCurrency="EURO"
                         onCurrencyChanged={(value) => {
-                            console.log(`valueFrom: ${value}`);
                             setRatioFrom(value);
                     }}/>
                     <AmountInputField

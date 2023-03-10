@@ -9,7 +9,6 @@ export default function useConvertAmount() {
             var amount = parseFloat(value);
             setFromCurrency(amount >= 0 ? amount : 0);
             setToCurrency(amount >= 0 ? amount * ratio : 0);
-            console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
         } catch (error) {
             console.error(error);
             zeroStates();
@@ -21,7 +20,6 @@ export default function useConvertAmount() {
             var amount = parseFloat(value);
             setFromCurrency(amount >= 0 ? amount / ratio : 0);
             setToCurrency(amount >= 0 ? amount : 0);
-            console.log(`value: ${value} - amount:${amount} - fromCurrency: ${fromCurrency} - toCurrency: ${toCurrency}`);
         } catch (error) {
             console.error(error);
             zeroStates();
