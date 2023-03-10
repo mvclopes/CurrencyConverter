@@ -1,16 +1,29 @@
 import React, {useState} from 'react';
 import {Modal, StyleSheet, Text, Pressable, View, FlatList, TouchableOpacity} from 'react-native';
-import { currenciesLabel } from '../../utils/currencies';
+import { currencies, currenciesLabel } from '../../utils/currencies';
 import { CurrencyItem } from '../CurrencyItem';
-import { useCurrency } from './hooks/useCurrency';
 
 interface CurrencySelectorProps {
     defaultCurrency?: string;
+    onCurrencyChanged: (value:number) => void;
 }
 
-export default function CurrencySelector({defaultCurrency, ...props}: CurrencySelectorProps) {
+const DEFAULT_CURRENCY_NAME = 'Real';
+const DEFAULT_CURRENCY_VALUE = 1;
+
+export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: CurrencySelectorProps) {
     const [modalVisible, setModalVisible] = useState(false);
-    const {DEFAULT_CURRENCY_NAME, changeCurrency, currentCurrencyLabel, currentCurrencyValue } = useCurrency();
+
+    const [currentCurrencyLabel, setCurrentCurrencyLabel] = useState<string>();
+
+    function changeCurrency(currency: string) {
+        let value: number = currencies.get(currency) ? currencies.get(currency) as number : DEFAULT_CURRENCY_VALUE;
+        setCurrentCurrencyLabel(currency);
+        onCurrencyChanged(value);
+        console.log(`currency: ${currency} value: ${value}`);
+        setModalVisible(!modalVisible);
+    }
+
 
     return (
         <View>
@@ -41,10 +54,7 @@ export default function CurrencySelector({defaultCurrency, ...props}: CurrencySe
                             renderItem={({item}) => 
                                 <CurrencyItem 
                                     currency={item} 
-                                    onPressItem={() => {
-                                        changeCurrency(item);
-                                        setModalVisible(!modalVisible);
-                                    }} 
+                                    onPressItem={() => changeCurrency(item)} 
                                 /> 
                             }
                             keyExtractor={item => item}
