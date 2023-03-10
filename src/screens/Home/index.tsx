@@ -20,33 +20,39 @@ export default function Home() {
                 <Text style={[styles.title]}>Converta para reais</Text>
 
                 <View style={styles.row}>
-                    <CurrencySelector onCurrencyChanged={(value) => {
-                        setRatio(value);
-                        setConvertedAmount(amount*value)
-                    }}/>
-                    <AmountInputField
-                        onChangeText={(value:string) => {
-                            var amount = parseFloat(value);
-                            var convertedAmount = amount * ratio;
-                            setAmount(amount >= 0 ? amount : 0);
-                            setConvertedAmount(convertedAmount >= 0 ? convertedAmount : 0);
-                        }}
-                        value={amount.toString()}
-                        defaultValue="0"
-                    />
+                    <View style={{flex:1, marginStart: 16}}>
+                        <CurrencySelector onCurrencyChanged={(value) => {
+                            setRatio(value);
+                            setConvertedAmount(amount*value)
+                        }}/>
+                    </View>
+                    <View style={{flex:2, marginHorizontal: 16}}>
+                        <AmountInputField
+                            onChangeText={(value:string) => {
+                                var amount = parseFloat(value);
+                                var convertedAmount = amount * ratio;
+                                setAmount(amount >= 0 ? amount : 0);
+                                setConvertedAmount(convertedAmount >= 0 ? convertedAmount : 0);
+                            }}
+                            value={amount.toString()}
+                            defaultValue="0"
+                        />
+                    </View>
                 </View>
                 
                 <Image style={styles.image} source={MONEY_EXCHANGE_ICON}/>
                 
                 <View style={styles.row}>
-                    <AmountInputField
-                        editable={false}
-                        onChangeText={(value:string) => {
+                    <View style={{flex:1, marginHorizontal: 16}}>
+                        <AmountInputField
+                            editable={false}
+                            onChangeText={(value:string) => {
 
-                        }}
-                        value={convertedAmount.toString()}
-                        defaultValue="0"
-                    />
+                            }}
+                            value={convertedAmount.toString()}
+                            defaultValue="0"
+                        />
+                    </View>
                 </View>
             </SafeAreaView>
           </ImageBackground>
@@ -60,7 +66,6 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
     },
     title: {
         color: '#FFF',
@@ -80,6 +85,7 @@ const styles = StyleSheet.create({
     image: {
         alignSelf: 'center',
         width: 50,
-        height: 50
+        height: 50,
+        margin: 16
     }
 });

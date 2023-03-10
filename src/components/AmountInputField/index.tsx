@@ -13,11 +13,13 @@ export default function AmountInputField({...props}: TextInputProps) {
 const styles = StyleSheet.create({
     input: {
         height: 60,
-        margin: 24,
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 10,
         backgroundColor: '#FFF',
-        borderColor: '#C3C3C3',
-        borderRadius: 16
+        borderColor: '#26874E',
+        borderRadius: 16,
+        color: '#26874E',
+        fontWeight: 'bold',
+        textAlign: 'center',
       },
 });

@@ -30,18 +30,24 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
                 style={({pressed}) => [
                     {
                         backgroundColor: pressed ? '#C3C3C3' : '#FFF',
-                        borderColor: pressed ? '#FFF' : '#26874E'
+                        borderColor: pressed ? '#FFF' : '#26874E',
+                        
                     },
                     styles.box
                 ]}
-                onPress={() => setModalVisible(true)}>
-                <Text style={styles.currencyText}>
-                    {
+                onPress={() => setModalVisible(true)}
+                children={({ pressed }) => (
+                    <Text style={[
+                        { color: pressed ? '#fff' : '#26874E'}, 
+                        styles.currencyText
+                    ]}>
+                        {
                         currentCurrencyLabel ? currentCurrencyLabel : 
                             defaultCurrency ? defaultCurrency : CurrenciesEnum.DOLAR
-                    }
-                </Text>
-            </Pressable>
+                        }
+                    </Text>
+                    )}
+                />
             <Modal
                 animationType="fade"
                 transparent={true}
@@ -70,7 +76,6 @@ export default function CurrencySelector({defaultCurrency, onCurrencyChanged}: C
 const styles = StyleSheet.create({
   box: {
     height: 60,
-    margin: 24,
     borderWidth: 2,
     padding: 10,
     borderRadius: 16,
@@ -79,7 +84,6 @@ const styles = StyleSheet.create({
   },
   currencyText: {
     fontWeight: 'bold',
-    color: '#26874E'
   },
   modalView: {
     margin: 20,
